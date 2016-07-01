@@ -1,0 +1,17 @@
+################## 本地私有镜像库使用 ########################
+# 1.测试访问docker私有仓库
+curl http://192.168.2.233:5000
+# 2.修改docker启动参数
+vi /etc/sysconfig/docker
+# 修改为一行
+other_args="--selinux-enabled=true --insecure-registry 192.168.2.233:5000"
+
+# 3.将img的tag修改为
+docker tag hello-world 192.168.2.233:5000/hello-world
+# 4.上传到仓库
+docker push 192.168.2.233:5000/hello-world
+
+# 5.从仓库中取用
+# 搜索
+curl http://192.168.2.233:5000/v1/search
+docker pull 192.168.2.233:5000/hello-world

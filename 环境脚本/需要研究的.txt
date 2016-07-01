@@ -1,0 +1,10 @@
+1. HA相关理论及规则
+
+2. docker相关网络的配置及使用上的差异及使用整理
+
+3. dubbo应用在docker下应用
+
+4. docker自带的工具swarm ,compose etc.
+
+5. nginx使用webo的模块可以实现自动反向代理consul配置
+https://github.com/weibocom/nginx-upsync-module

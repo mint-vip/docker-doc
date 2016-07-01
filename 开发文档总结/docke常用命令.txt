@@ -1,0 +1,18 @@
+1. 检索镜像：docker search image_name（检索可pull的镜像源）
+2. 启停docker：service docker start/stop
+3. 重启docker：service docker restart
+4. 下载镜像：docker pull 镜像名称:版本（默认latest）
+5. 上传镜像：push push 镜像名称:版本（默认latest）
+6. 本地镜像列表：docker images
+7. 删除镜像：docker rmi  镜像名称（删除的只是标签）
+8. 删除镜像：docker rmi  镜像ID（真实删除）
+9. 运行容器：docker run 
+10.启动/停止容器：docker start/stop 容器ID
+11.查询容器：docker ps -a（不带‘-a’只展现运行中容器，否则展现所有容器）
+12.显示容器端口映射：docker port 容器ID（容器非host启动）
+13.删除已停止容器：docker rm 容器ID
+14.删除已停止容器：docker rm $(docker ps -a -q)
+15.进入容器：docker exec -i -t  容器ID  /bin/bash
+16.查询镜像/容器元数据：docker inspect 镜像ID/容器ID
+17.查询容器运行日志：docker logs -f 容器ID
+18.复制容器内文件到本地：docker cp 镜像ID:/xx/xx/file /opt/some/file

@@ -1,0 +1,18 @@
+## 将以下文件加入到web工根目录中与pom.xml同级
+## 使用docker build -t my/webappname .  打出新的工程对应的docker包
+## 使用docker run -d -p 9999:8080 my/webappname 运行工程docker包
+## 使用 127.0.0.1:9999/web-context访问相关应用
+
+############ begin Dockerfile ##############
+FROM index.alauda.cn/mintvp/tomcat:7
+RUN mkdir -p /code
+WORKDIR /code
+ADD src /code/src
+ADD pom.xml /code/pom.xml
+# bulid project
+RUN mvn clean install package
+# clean maven rep
+rm -rf /usr/.m2/repository
+RUN yes|cp target/*.war $CATALINA_HOME/webapps
+rm -rf /code
+########### end Dockerfile ##################

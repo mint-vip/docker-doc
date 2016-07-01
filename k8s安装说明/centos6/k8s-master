@@ -1,0 +1,39 @@
+nohup kube-apiserver --insecure-bind-address=0.0.0.0 \
+--insecure-port=8080 \
+--advertise-address=192.168.2.233 \
+--service-cluster-ip-range='10.0.0.0/16' \
+--etcd-servers=http://192.168.2.233:2379 \
+--kubelet-port=10250 \
+--allow_privileged=false  &
+
+
+
+nohup kube-controller-manager --logtostderr=true \
+--master=192.168.2.233:8080 &
+
+nohup kube-scheduler --master=192.168.2.233:8080 &
+
+
+-- slave
+nohup kube-proxy  --master=192.168.2.233:8080 &
+
+nohup kubelet --logtostderr=false  \
+--v=0  \
+--allow-privileged=false  \
+--log_dir=/var/log/kube  \
+--address=192.168.2.233  \
+--hostname_override=192.168.2.233 \
+--port=10250  \
+--api_servers=http://192.168.2.233:8080 &
+
+
+#问题1：找不到machine-id
+#创建一个machine-id
+dbus-uuidgen >/etc/machine-id
+#问题2：Image garbage collection failed: unable to find data for container /
+
+
+#查看是否运行正常
+curl 192.168.2.233:8080/healthz/ping  返回 ok
+
+

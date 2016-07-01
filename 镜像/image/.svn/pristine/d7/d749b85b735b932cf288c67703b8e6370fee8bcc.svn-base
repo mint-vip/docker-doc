@@ -1,0 +1,22 @@
+FROM comm/tomcat7
+
+MAINTAINER "a@com"
+
+RUN mkdir -p /code
+WORKDIR /code
+
+ADD src /code/src
+ADD pom.xml /code/pom.xml
+
+# bulid project
+RUN mvn clean install package
+
+# clean maven rep
+rm -rf /usr/.m2/repository
+
+RUN yes|cp target/*.war $CATALINA_HOME/webapps
+
+rm -rf /code
+
+
+
