@@ -30,3 +30,8 @@ docker run -t -i  192.168.2.39:5000/redis-trib info 192.168.2.39:6379
 ```sh
 docker run -it 192.168.2.39:5000/redis:3.2.0 redis-cli -h redis -p 6379 -h 192.168.2.38
 ```
+
+# 7. redis官方性能测试工具
+```sh
+docker run -it 192.168.2.39:5000/redis:3.2.0 redis-benchmark -p 6379 -h 192.168.2.38 -c 100 -n 100000 
+```
